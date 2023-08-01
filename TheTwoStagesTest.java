@@ -43,7 +43,7 @@ public class TheTwoStagesTest {
 		List<String> list = java.util.Arrays.asList(cases);
 
         Stream.iterate(0, i -> i + 2).limit(list.size()/2).forEach(i -> {
-        	System.out.println("<"+i+">: "+String.format("%" + 20 + "s", list.get(i))+"-->"+list.get(i+1));
+        	System.out.println("<"+i/2+">: "+String.format("%" + 20 + "s", list.get(i))+"-->"+list.get(i+1));
     		Assert.assertEquals( theService.removeAAA(list.get(i)), list.get(i+1) );
 
         });	
@@ -76,7 +76,7 @@ public class TheTwoStagesTest {
 		List<String> list = java.util.Arrays.asList(cases2);
 
         Stream.iterate(0, i -> i + 2).limit(list.size()/2).forEach(i -> {
-        	System.out.println("<"+i+">: "+String.format("%" + 20 + "s", list.get(i))+"-->"+list.get(i+1));
+        	System.out.println("<"+i/2+">: "+String.format("%" + 20 + "s", list.get(i))+"-->"+list.get(i+1));
     		Assert.assertEquals( theService.removeBBB(list.get(i)), list.get(i+1) );
 
         });	
