@@ -65,21 +65,21 @@ public class TheTwoStages {
 					tmp = String.format("%" + (cnt + 1) + "s", "").replace(' ', ch);
 				}
 			} else {
-			switch (type) {
-				case 1 -> {
-					if (cnt > 1) {
-						lst.add(tmp);
+				switch (type) {
+					case 1 -> {
+						if (cnt > 1) {
+							lst.add(tmp);
+						}
 					}
-				}
-				case 2 -> {
-					if (cnt > 1 && !tmp.startsWith("a")) {
-						lst.add(tmp);
+					case 2 -> {
+						if (cnt > 1 && !tmp.startsWith("a")) {
+							lst.add(tmp);
+						}
 					}
-				}
-				default -> {
-					System.out.println("Notification!: the input type is not correct");
-				}
-			};
+					default -> {
+						System.out.println("Notification!: the input type is not correct");
+					}
+				};
 				cnt = 0;
 			}
 			newStr = newStr + str.charAt(i);
