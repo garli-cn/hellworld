@@ -65,9 +65,21 @@ public class TheTwoStages {
 					tmp = String.format("%" + (cnt + 1) + "s", "").replace(' ', ch);
 				}
 			} else {
-				if (cnt > 1 && !tmp.startsWith("a")) {
-					lst.add(tmp);
+			switch (type) {
+				case 1 -> {
+					if (cnt > 1) {
+						lst.add(tmp);
+					}
 				}
+				case 2 -> {
+					if (cnt > 1 && !tmp.startsWith("a")) {
+						lst.add(tmp);
+					}
+				}
+				default -> {
+					System.out.println("Notification!: the input type is not correct");
+				}
+			};
 				cnt = 0;
 			}
 			newStr = newStr + str.charAt(i);
@@ -82,14 +94,17 @@ public class TheTwoStages {
 				newStr = this.replaceChars(newStr, lstitem, type);
 			}
 		}
-
 		// For distinct character strings or strings that not longer than 2 digits,
 		// return ""
 		// else leave it for next recursive
 		if (tmp.isEmpty()) {
 			return newStr;
 		} else {
-			return removeAAA(newStr, type);
+			if (newStr.isEmpty()) {
+				return newStr;
+			}else {
+				return removeAAA(newStr, type);
+			}
 		}
 	}
 
