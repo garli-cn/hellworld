@@ -1,9 +1,5 @@
 package com.newfeatures.demo;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -15,8 +11,11 @@ public class SpringbootLambdaApplication {
 		TheTwoStages tts = new TheTwoStages();
 
 		String stra = "aabcccbbad";
+		//input parameter 1 for stage#1
 		System.out.println(tts.removeAAA(stra,1));
+		
 		String strb = "abcccbad";
+		//input parameter 1 for stage#2
 		System.out.println(tts.removeAAA(strb,2));
 	}
 

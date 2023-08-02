@@ -38,6 +38,7 @@ public class TheTwoStagesTest {
 			"abcccddda","aba",
 			"abbbcddd","ac"
 	};
+	//unit test for stage#1
 	@Test
 	public void removeAAA() {
 		
@@ -72,6 +73,7 @@ public class TheTwoStagesTest {
 			"abbbcddd","aacc"
 	};
 	
+	//unit test for stage#2
 	@Test
 	public void removeBBB() {
 		
