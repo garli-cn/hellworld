@@ -10,6 +10,7 @@ package com.newfeatures.demo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.springframework.stereotype.Service;
 
@@ -21,14 +22,13 @@ public class TheTwoStages {
 	 * 
 	 * @args
 	 */
-	public static String removeAAA(String str) {
+	public String removeAAA(String str) {
 		if (str.isEmpty()) {
 			return "";
 		}
 		char ch = str.charAt(0);
-		String newStr = "";
+		String newStr = "",tmp = "";
 		int cnt = 0;
-		String tmp = "";
 		List<String> lst = new ArrayList<String>();
 		newStr += ch;
 		for (int i = 1; i < str.length(); i++) {
@@ -51,24 +51,25 @@ public class TheTwoStages {
 			}
 			newStr = newStr + str.charAt(i);
 			ch = str.charAt(i);
+			if((i==str.length()-1) && !tmp.isEmpty()) {
+				lst.add(tmp);
+			}
 		}
 		// For distinct character strings or strings that not longer than 2 digits,
 		// return ""
 		// else leave it for next recursive
-		if (newStr.chars().distinct().count() == 1) {
+		if ( this.isDistinct(newStr) ) {
 			if (newStr.length() > 2) {
 				return "";
 			} else {
 				return newStr;
 			}
 		} else {
-			if (!tmp.isEmpty()) {
-				lst.add(tmp);
-			} else {
+			if (tmp.isEmpty()) {
 				return newStr;
 			}
 			for (String lsitem : lst) {
-				newStr = newStr.replace(lsitem, "");
+				newStr = this.replaceChars(newStr,lsitem, 1);
 			}
 		}
 		return removeAAA(newStr);
@@ -77,7 +78,7 @@ public class TheTwoStages {
 	public String removeBBB(String str) {
 		char ch = str.charAt(0);
 
-		if (str.chars().distinct().count() == 1) {
+		if (this.isDistinct(str)) {
 			if (ch == 'a' && str.length() > 2) {
 				return "";
 			} else if (str.length() < 3) {
@@ -106,24 +107,14 @@ public class TheTwoStages {
 			}
 			newStr = newStr + str.charAt(i);
 			ch = str.charAt(i);
-		}
-
-		if (newStr.length() < 3 || "".equals(tmp) || newStr.equals(tmp)) {
-			return newStr;
-		} else {
-			if (!"".equals(tmp)) {
+			if((i==str.length()-1) && !tmp.isEmpty()) {
 				lst.add(tmp);
 			}
-			for (int j = 0; j < lst.size(); j++) {
-				String lstItem = lst.get(j);
-				if (!lstItem.isEmpty()) {
-					String singleChr = "";
-					if (lstItem.startsWith("a")) {
-						singleChr = "";
-					} else {
-						singleChr = String.valueOf((char) ((int) lstItem.charAt(0) - 1));
-					}
-					newStr = newStr.replace(lst.get(j), singleChr);
+		}
+
+			for (String lstitem : lst) {
+				if (!lstitem.isEmpty()) {
+					newStr = this.replaceChars(newStr,lstitem, 2);;
 				}
 			}
 
@@ -132,6 +123,21 @@ public class TheTwoStages {
 			} else {
 				return removeBBB(newStr);
 			}
-		}
 	}
+	
+	//check if the chars is distinct
+	private boolean isDistinct(String str) {
+		return str.chars().distinct().count() == 1;
+	}
+	
+	//replace substring with different chars according the input type
+	private String replaceChars(String str, String tmp, int type) {
+		String rtnStr = switch (type) {
+			case 1 -> str.replace(tmp, "");//str.length()>2?"":str
+			case 2 -> str.replace(tmp,(tmp.charAt(0)=='a')?"":String.valueOf((char) ((int) tmp.charAt(0) - 1)));
+			default -> str;
+		};
+		return rtnStr;
+	}
+	
 }

@@ -19,6 +19,7 @@ public class TheTwoStagesTest {
 	private TheTwoStages theService;
 
 	String[] cases= {
+			/*input, output*/
 			"aabcccbbad","d",
 			"a","a",
 			"aa","aa",
@@ -41,16 +42,17 @@ public class TheTwoStagesTest {
 	public void removeAAA() {
 		
 		List<String> list = java.util.Arrays.asList(cases);
-
+		System.out.println("\nState#1: Junit test cases");
         Stream.iterate(0, i -> i + 2).limit(list.size()/2).forEach(i -> {
-        	System.out.println("<"+i/2+">: "+String.format("%" + 20 + "s", list.get(i))+"-->"+list.get(i+1));
     		Assert.assertEquals( theService.removeAAA(list.get(i)), list.get(i+1) );
+        	System.out.println("<"+i/2+">: "+String.format("%" + 20 + "s", list.get(i))+"-->"+list.get(i+1));
 
         });	
 	}
 	
 
 	String[] cases2= {
+			/*input, output*/
 			"abcccbad","d",
 			"ccc","b",
 			"aaa","",
@@ -75,9 +77,10 @@ public class TheTwoStagesTest {
 		
 		List<String> list = java.util.Arrays.asList(cases2);
 
+		System.out.println("\nState#2: Junit test cases");
         Stream.iterate(0, i -> i + 2).limit(list.size()/2).forEach(i -> {
-        	System.out.println("<"+i/2+">: "+String.format("%" + 20 + "s", list.get(i))+"-->"+list.get(i+1));
     		Assert.assertEquals( theService.removeBBB(list.get(i)), list.get(i+1) );
+        	System.out.println("<"+i/2+">: "+String.format("%" + 20 + "s", list.get(i))+"-->"+list.get(i+1));
 
         });	
 	}
