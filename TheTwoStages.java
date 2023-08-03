@@ -26,28 +26,17 @@ public class TheTwoStages {
 		char ch = str.charAt(0);
 
 		if (this.isDistinct(str)) {
-			switch (type) {
-				case 1 -> {
-					if (str.length() > 2 || str.isEmpty()) {
-						return "";
-					} else {
-						return str;
-					}
-				}
-				case 2 -> {
-					if (ch == 'a' && str.length() > 2) {
-						return "";
-					} else if (str.length() < 3) {
-						return str;
-					} else {
-						return String.valueOf((char) ((int) ch - 1));
-					}
-				}
-				default -> {
-					System.out.println("Notification!: the input type is not correct");
-				}
-			};
+			if(str.length() > 2) {
+				switch (type) {
+					case 1 -> {return "";}
+					case 2 -> {return (ch == 'a')?"":String.valueOf((char) ((int) ch - 1));}
+					default ->{System.out.println("Notification!: the input type is not correct");}
+				};
+			}else {
+				return str;
+			}
 		}
+		
 		String newStr = "", tmp = "";
 		int cnt = 0;
 		List<String> lst = new ArrayList<String>();
